@@ -1,5 +1,6 @@
 package com.project.helpdesksystem.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -15,9 +16,10 @@ import com.project.helpdesksystem.enums.Prioridade;
 import com.project.helpdesksystem.enums.Status;
 
 @Entity
-public class Chamado extends Pessoa {
+public class Chamado implements Serializable {
+ 		
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -27,6 +29,7 @@ public class Chamado extends Pessoa {
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
+	
 	private Prioridade prioridade;
 	private Status status;
 	private String titulo;
@@ -36,12 +39,13 @@ public class Chamado extends Pessoa {
 	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;
 	
-	@JoinColumn(name = "cliente_id")
+	@ManyToOne
+ 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
 	public Chamado() {
-		// TODO Auto-generated constructor stub
-	}
+		super();
+ 	}
 
 	public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico,
 			Cliente cliente) {
