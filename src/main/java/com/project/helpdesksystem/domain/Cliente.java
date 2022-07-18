@@ -3,15 +3,23 @@ package com.project.helpdesksystem.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.OneToMany;
+
+import com.project.helpdesksystem.enums.Perfil;
+
 public class Cliente extends Pessoa{
-    
+	private static final long serialVersionUID = 1L;
+	
+	@OneToMany(mappedBy = "cliente")
 	private List<Chamado> chamados = new ArrayList<>();
 	
 	public Cliente() {
- 	}
+		addPerfils(Perfil.CLIENTE);
+ 	}	
 
 	public Cliente(Integer id, String nome, String cpf, String email, String senha) {
 		super(id, nome, cpf, email, senha);
+		addPerfils(Perfil.CLIENTE);
     }
 
 	public List<Chamado> getChamados() {
