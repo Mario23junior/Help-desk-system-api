@@ -24,6 +24,9 @@ public class TecnicoDTO implements Serializable {
 	protected LocalDate dataCriacao = LocalDate.now();
 
 	public TecnicoDTO() {
+		super();
+		setPerfils(Perfil.CLIENTE);
+
 	}
 
 	public TecnicoDTO(Tecnico tec) {
@@ -37,6 +40,8 @@ public class TecnicoDTO implements Serializable {
 		this.dataCriacao = tec.getDataCriacao();
 	}
 
+	
+	
 	public Integer getId() {
 		return id;
 	}
