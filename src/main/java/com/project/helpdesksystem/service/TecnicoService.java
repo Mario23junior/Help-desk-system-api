@@ -1,5 +1,6 @@
 package com.project.helpdesksystem.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -20,6 +21,10 @@ public class TecnicoService {
 	public Tecnico findById(Integer id) {
 		Optional<Tecnico> find = tecnicoRepository.findById(id);
 		return find.orElseThrow(() -> new ObjectNotFoundExceptionValues("O ID "+id+" Não foi encontrado ,nos registros."));
+	}
+
+	public List<Tecnico> findAllDataValues() {
+ 		return tecnicoRepository.findAll();
 	}
 	
 }
