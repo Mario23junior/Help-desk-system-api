@@ -5,18 +5,23 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.project.helpdesksystem.domain.Pessoa;
 import com.project.helpdesksystem.domain.Tecnico;
 import com.project.helpdesksystem.dtos.TecnicoDTO;
+import com.project.helpdesksystem.exceptions.DataIntegrityViolationException;
 import com.project.helpdesksystem.exceptions.ObjectNotFoundExceptionValues;
+import com.project.helpdesksystem.repository.PessoaRepository;
 import com.project.helpdesksystem.repository.TecnicoRepository;
 
 @Service
 public class TecnicoService {
 
 	private TecnicoRepository tecnicoRepository;
+	private PessoaRepository pessoaRepository;
 
-	public TecnicoService(TecnicoRepository tecnicoRepository) {
+	public TecnicoService(TecnicoRepository tecnicoRepository, PessoaRepository pessoaRepository) {
 		this.tecnicoRepository = tecnicoRepository;
+		this.pessoaRepository = pessoaRepository;
 	}
 
 	public Tecnico findById(Integer id) {
@@ -31,8 +36,21 @@ public class TecnicoService {
 
 	public Tecnico create(TecnicoDTO tecnicoDto) {
 		tecnicoDto.setId(null);
+		validaPorCpfEmailConsul(tecnicoDto);
 		Tecnico tec = new Tecnico(tecnicoDto);
 		return tecnicoRepository.save(tec);
 	}
 
+	private void validaPorCpfEmailConsul(TecnicoDTO tecnicoDto) {
+		Optional<Pessoa> pessoa = pessoaRepository.findByCpf(tecnicoDto.getCpf());
+		if (pessoa.isPresent() && pessoa.get().getId() != tecnicoDto.getId()) {
+			throw new DataIntegrityViolationException("CPF já existe cadastros com esté CPF");
+		}
+		
+		pessoa = pessoaRepository.findByEmail(tecnicoDto.getEmail());
+		if (pessoa.isPresent() && pessoa.get().getId() != tecnicoDto.getId()) {
+			throw new DataIntegrityViolationException("EMAIL já existe cadastros com esté EMAIL");
+		}	
+
+	}
 }
