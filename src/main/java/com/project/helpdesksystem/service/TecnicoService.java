@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.project.helpdesksystem.domain.Tecnico;
+import com.project.helpdesksystem.exceptions.ObjectNotFoundExceptionValues;
 import com.project.helpdesksystem.repository.TecnicoRepository;
 
 @Service
@@ -18,7 +19,7 @@ public class TecnicoService {
 	
 	public Tecnico findById(Integer id) {
 		Optional<Tecnico> find = tecnicoRepository.findById(id);
-		return find.orElse(null);
+		return find.orElseThrow(() -> new ObjectNotFoundExceptionValues("O ID "+id+" Não foi encontrado ,nos registros."));
 	}
 	
 }
