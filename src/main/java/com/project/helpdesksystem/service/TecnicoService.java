@@ -9,7 +9,7 @@ import com.project.helpdesksystem.domain.Pessoa;
 import com.project.helpdesksystem.domain.Tecnico;
 import com.project.helpdesksystem.dtos.TecnicoDTO;
 import com.project.helpdesksystem.exceptions.DataIntegrityViolationException;
-import com.project.helpdesksystem.exceptions.ObjectNotFoundExceptionValues;
+import com.project.helpdesksystem.handleException.ObjectNotFoundExceptionValues;
 import com.project.helpdesksystem.repository.PessoaRepository;
 import com.project.helpdesksystem.repository.TecnicoRepository;
 

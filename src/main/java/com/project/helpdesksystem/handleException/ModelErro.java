@@ -1,4 +1,4 @@
-package com.project.helpdesksystem.exceptions;
+package com.project.helpdesksystem.handleException;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

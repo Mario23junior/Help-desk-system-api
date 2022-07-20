@@ -1,4 +1,4 @@
-package com.project.helpdesksystem.exceptions;
+package com.project.helpdesksystem.handleException;
 
 public class ObjectNotFoundExceptionValues extends RuntimeException {
 
