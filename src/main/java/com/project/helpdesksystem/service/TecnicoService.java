@@ -27,9 +27,8 @@ public class TecnicoService {
 	}
 
 	public Tecnico findById(Integer id) {
-		Optional<Tecnico> find = tecnicoRepository.findById(id);
-		return find.orElseThrow(
-				() -> new ObjectNotFoundExceptionValues("O ID " + id + " Não foi encontrado ,nos registros."));
+		Optional<Tecnico> obj = tecnicoRepository.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundExceptionValues("Objeto não encontrado! Id: " + id));
 	}
 
 	public List<Tecnico> findAllDataValues() {
@@ -51,6 +50,16 @@ public class TecnicoService {
 		oldObj = new Tecnico(objDTO);
 		return tecnicoRepository.save(oldObj);
 	}
+
+	public void delete(Integer id) {
+		Tecnico obj = findById(id);
+
+		if (obj.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("Técnico possui ordens de serviço e não pode ser deletado!");
+		}
+		tecnicoRepository.deleteById(id);
+	}
+
 
 	private void validaPorCpfEmailConsul(TecnicoDTO tecnicoDto) {
 		Optional<Pessoa> pessoa = pessoaRepository.findByCpf(tecnicoDto.getCpf());
