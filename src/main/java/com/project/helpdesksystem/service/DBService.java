@@ -28,12 +28,12 @@ public class DBService {
 	private TecnicoRepository tecnicoRepository;
 	
 	public void intanciaDB() {
-		Tecnico tec1 = new Tecnico(1,"Arnold jose","60504571079","arnandoMagic@gmail.com","123923");
+		Tecnico tec1 = new Tecnico(null,"Arnold jose","60504571079","arnandoMagic@gmail.com","123923");
 		tec1.addPerfil(Perfil.ADMIN);
 		
-		Cliente cli1 = new Cliente(2,"Linux torvals","04813101003","linuxTorns@gmail.com","cf2323pown");
+		Cliente cli1 = new Cliente(null,"Linux torvals","04813101003","linuxTorns@gmail.com","cf2323pown");
 		
-		Chamado c1 = new Chamado(3, Prioridade.MEDIA,Status.ANDAMENTO,"primeiro chamado","Mudança de os", tec1,cli1);
+		Chamado c1 = new Chamado(null, Prioridade.MEDIA,Status.ANDAMENTO,"primeiro chamado","Mudança de os", tec1,cli1);
 		
 		tecnicoRepository.saveAll(Arrays.asList(tec1));
 		clienteRepository.saveAll(Arrays.asList(cli1));

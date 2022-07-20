@@ -29,7 +29,7 @@ public class Tecnico extends Pessoa {
 		addPerfil(Perfil.CLIENTE);
 	}
 	
-	public Tecnico(TecnicoDTO obj) {
+		public Tecnico(TecnicoDTO obj) {
 		super();
 		this.id = obj.getId();
 		this.nome = obj.getNome();
@@ -39,6 +39,7 @@ public class Tecnico extends Pessoa {
 		this.perfis = obj.getPerfils().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
 	}
+
 
 	public List<Chamado> getChamados() {
 		return chamados;
