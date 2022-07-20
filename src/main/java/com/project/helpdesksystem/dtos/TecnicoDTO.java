@@ -34,8 +34,7 @@ public class TecnicoDTO implements Serializable {
 	protected LocalDate dataCriacao = LocalDate.now();
 
 	public TecnicoDTO() {
-		super();
-		setPerfils(Perfil.CLIENTE);
+ 		setPerfils(Perfil.CLIENTE);
 
 	}
 
@@ -46,8 +45,9 @@ public class TecnicoDTO implements Serializable {
 		this.cpf = tec.getCpf();
 		this.email = tec.getEmail();
 		this.senha = tec.getSenha();
-		this.perfils = tec.getPerfils().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+		this.perfils = tec.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = tec.getDataCriacao();
+ 		setPerfils(Perfil.CLIENTE); 
 	}
 
 	

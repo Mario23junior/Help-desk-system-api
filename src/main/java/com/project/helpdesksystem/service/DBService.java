@@ -29,7 +29,7 @@ public class DBService {
 	
 	public void intanciaDB() {
 		Tecnico tec1 = new Tecnico(1,"Arnold jose","60504571079","arnandoMagic@gmail.com","123923");
-		tec1.addPerfils(Perfil.ADMIN);
+		tec1.addPerfil(Perfil.ADMIN);
 		
 		Cliente cli1 = new Cliente(2,"Linux torvals","04813101003","linuxTorns@gmail.com","cf2323pown");
 		

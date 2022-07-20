@@ -7,25 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.helpdesksystem.enums.Perfil;
 
 @Entity
-public class Cliente extends Pessoa { 
+public class Cliente extends Pessoa {
 	private static final long serialVersionUID = 1L;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Chamado> chamados = new ArrayList<>();
-	
+
 	public Cliente() {
-		super();
-		addPerfils(Perfil.CLIENTE);
- 	}	
+ 	}
 
 	public Cliente(Integer id, String nome, String cpf, String email, String senha) {
 		super(id, nome, cpf, email, senha);
-		addPerfils(Perfil.CLIENTE);
-    }
+	}
 
 	public List<Chamado> getChamados() {
 		return chamados;
@@ -33,5 +29,6 @@ public class Cliente extends Pessoa {
 
 	public void setChamados(List<Chamado> chamados) {
 		this.chamados = chamados;
-	}	
+	}
+
 }
