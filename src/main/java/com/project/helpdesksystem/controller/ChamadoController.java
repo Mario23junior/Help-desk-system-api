@@ -55,7 +55,8 @@ public class ChamadoController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<ChamadoDTO> update(@PathVariable Integer id, @RequestBody ChamadoDTO chamadoDto) {
-		return null;
+		Chamado chamadoActuali = chamadoService.update(id,chamadoDto);
+		return ResponseEntity.ok().body( new ChamadoDTO(chamadoActuali));	
 	}
 
 }
