@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.helpdesksystem.domain.Cliente;
@@ -20,10 +21,12 @@ public class ClienteService {
 
 	private ClienteRepository clienteRepository;
 	private PessoaRepository pessoaRepository;
+ 	private BCryptPasswordEncoder enconder;
 
-	public ClienteService(ClienteRepository clienteRepository, PessoaRepository pessoaRepository) {
+	public ClienteService(ClienteRepository clienteRepository, PessoaRepository pessoaRepository,BCryptPasswordEncoder enconder) {
 		this.clienteRepository = clienteRepository;
 		this.pessoaRepository = pessoaRepository;
+		this.enconder = enconder;
 	}
 
 	public Cliente findById(Integer id) {
@@ -37,6 +40,7 @@ public class ClienteService {
 
 	public Cliente create(ClienteDTO clienteDto) {
 		clienteDto.setId(null);
+		clienteDto.setSenha(enconder.encode(clienteDto.getSenha()));
 		validaPorCpfEmailConsul(clienteDto);
 		Cliente tec = new Cliente(clienteDto);
 		return clienteRepository.save(tec);

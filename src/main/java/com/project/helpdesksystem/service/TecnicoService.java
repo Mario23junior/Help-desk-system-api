@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.helpdesksystem.domain.Pessoa;
@@ -20,10 +21,13 @@ public class TecnicoService {
 
 	private TecnicoRepository tecnicoRepository;
 	private PessoaRepository pessoaRepository;
+ 	private BCryptPasswordEncoder enconder;
 
-	public TecnicoService(TecnicoRepository tecnicoRepository, PessoaRepository pessoaRepository) {
+
+	public TecnicoService(TecnicoRepository tecnicoRepository, PessoaRepository pessoaRepository,BCryptPasswordEncoder enconder) {
 		this.tecnicoRepository = tecnicoRepository;
 		this.pessoaRepository = pessoaRepository;
+		this.enconder = enconder;
 	}
 
 	public Tecnico findById(Integer id) {
@@ -37,6 +41,8 @@ public class TecnicoService {
 
 	public Tecnico create(TecnicoDTO tecnicoDto) {
 		tecnicoDto.setId(null);
+		tecnicoDto.setSenha(enconder.encode(tecnicoDto.getSenha()));
+
 		validaPorCpfEmailConsul(tecnicoDto);
 		Tecnico tec = new Tecnico(tecnicoDto);
 		return tecnicoRepository.save(tec);
