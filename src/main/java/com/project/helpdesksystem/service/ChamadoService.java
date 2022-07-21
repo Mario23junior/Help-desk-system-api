@@ -1,5 +1,6 @@
 package com.project.helpdesksystem.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -20,6 +21,10 @@ public class ChamadoService {
 	public Chamado findById(Integer id) {
 		Optional<Chamado> chamadoFind = chamadoRepository.findById(id);
 		return chamadoFind.orElseThrow(
-				() -> new ObjectNotFoundExceptionValues("Chamado não de id : "+ id + " não foi encontrado"));
+				() -> new ObjectNotFoundExceptionValues("Chamado não de id : " + id + " não foi encontrado"));
 	}
+
+	public List<Chamado> findAllData() {
+		return chamadoRepository.findAll();
+  	}
 }
